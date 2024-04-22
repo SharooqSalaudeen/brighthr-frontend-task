@@ -1,145 +1,100 @@
-'use client';
-
 import Image from 'next/image';
-import { UpdateInvoice, DeleteInvoice } from '@/app/ui/invoices/buttons';
 import Status from '@/app/components/Status/status';
 import { formatDateToLocal } from '@/app/lib/utils';
-import { fetchFilteredInvoices } from '@/app/lib/data';
+import { fetchAllAbsences } from '@/app/lib/data';
+import { Absence } from '@/app/lib/types';
 
-export default function Table({
-	query,
-}: {
-	query: string;
-}) {
+export default async function Table() {
+    const absences = await fetchAllAbsences()
+    return (
+        <div className="mt-6 flow-root">
+            {/* <div className="inline-block min-w-full align-middle">
+                <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
+                    <div className="md:hidden">
+                        {absences?.map((absence: Absence
+                        ) => (
+                            <div
+                                key={absence.id}
+                                className="mb-2 w-full rounded-md bg-white p-4"
+                            >
+                                <div className="flex items-center justify-between border-b pb-4">
+                                    <div>
+                                        <p>{invoice.name}</p>
+                                    </div>
+                                    <Status status={absence.status} />
+                                </div>
+                                <div className="flex w-full items-center justify-between pt-4">
+                                    <div>
 
-	return (
-		<div className="mt-6 flow-root">
-			<div className="inline-block min-w-full align-middle">
-				<div className="rounded-lg bg-gray-50 p-2 md:pt-0">
-					<div className="md:hidden">
-						{invoices?.map((invoice) => (
-							<div
-								key={invoice.id}
-								className="mb-2 w-full rounded-md bg-white p-4"
-							>
-								<div className="flex items-center justify-between border-b pb-4">
-									<div>
-										<div className="mb-2 flex items-center">
-											<Image
-												src={invoice.image_url}
-												className="mr-2 rounded-full"
-												width={28}
-												height={28}
-												alt={`${invoice.name}'s profile picture`}
-											/>
-											<p>{invoice.name}</p>
-										</div>
-										<p className="text-sm text-gray-500">
-											{invoice.email}
-										</p>
-									</div>
-									<Status status={invoice.status} />
-								</div>
-								<div className="flex w-full items-center justify-between pt-4">
-									<div>
-										{/* <p className="text-xl font-medium">
-											{formatCurrency(invoice.amount)}
-										</p> */}
-										<p>{formatDateToLocal(invoice.date)}</p>
-									</div>
-									<div className="flex justify-end gap-2">
-										<UpdateInvoice id={invoice.id} />
-										<DeleteInvoice id={invoice.id} />
-									</div>
-								</div>
-							</div>
-						))}
-					</div>
-					<table className="hidden min-w-full text-gray-900 md:table">
-						<thead className="rounded-lg text-left text-sm font-normal">
-							<tr>
-								<th
-									scope="col"
-									className="px-4 py-5 font-medium sm:pl-6"
-								>
-									Customer
-								</th>
-								<th
-									scope="col"
-									className="px-3 py-5 font-medium"
-								>
-									Email
-								</th>
-								<th
-									scope="col"
-									className="px-3 py-5 font-medium"
-								>
-									Amount
-								</th>
-								<th
-									scope="col"
-									className="px-3 py-5 font-medium"
-								>
-									Date
-								</th>
-								<th
-									scope="col"
-									className="px-3 py-5 font-medium"
-								>
-									Status
-								</th>
-								<th
-									scope="col"
-									className="relative py-3 pl-6 pr-3"
-								>
-									<span className="sr-only">Edit</span>
-								</th>
-							</tr>
-						</thead>
-						<tbody className="bg-white">
-							{invoices?.map((invoice) => (
-								<tr
-									key={invoice.id}
-									className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
-								>
-									<td className="whitespace-nowrap py-3 pl-6 pr-3">
-										<div className="flex items-center gap-3">
-											<Image
-												src={invoice.image_url}
-												className="rounded-full"
-												width={28}
-												height={28}
-												alt={`${invoice.name}'s profile picture`}
-											/>
-											<p>{invoice.name}</p>
-										</div>
-									</td>
-									<td className="whitespace-nowrap px-3 py-3">
-										{invoice.email}
-									</td>
-									{/* <td className="whitespace-nowrap px-3 py-3">
-										{formatCurrency(invoice.amount)}
-									</td> */}
-									<td className="whitespace-nowrap px-3 py-3">
-										{formatDateToLocal(invoice.date)}
-									</td>
-									<td className="whitespace-nowrap px-3 py-3">
-										<Status
-											status={invoice.status}
-										/>
-									</td>
-									<td className="whitespace-nowrap py-3 pl-6 pr-3">
-										<div className="flex justify-end gap-3">
-											<UpdateInvoice id={invoice.id} />
-											<DeleteInvoice id={invoice.id} />
-										</div>
-									</td>
-								</tr>
-							))}
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	);
+                                        <p>{formatDateToLocal(absence.date)}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <table className="hidden min-w-full text-gray-900 md:table">
+                        <thead className="rounded-lg text-left text-sm font-normal">
+                            <tr>
+                                <th
+                                    scope="col"
+                                    className="px-4 py-5 font-medium sm:pl-6"
+                                >
+                                    Employee Name
+                                </th>
+                                <th
+                                    scope="col"
+                                    className="px-3 py-5 font-medium"
+                                >
+                                    Absense Type
+                                </th>
+                                <th
+                                    scope="col"
+                                    className="px-3 py-5 font-medium"
+                                >
+                                    Start Date
+                                </th>
+                                <th
+                                    scope="col"
+                                    className="px-3 py-5 font-medium"
+                                >
+                                    End Date
+                                </th>
+                                <th
+                                    scope="col"
+                                    className="px-3 py-5 font-medium"
+                                >
+                                    Status
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody className="bg-white">
+                            {absences?.map((absence: Absence) => (
+                                <tr
+                                    key={absence.id}
+                                    className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
+                                >
+                                    <td className="whitespace-nowrap py-3 pl-6 pr-3">
+                                        <p>{absence.name}</p>
+                                    </td>
+                                    <td className="whitespace-nowrap px-3 py-3">
+                                        {absence.email}
+                                    </td>
+
+                                    <td className="whitespace-nowrap px-3 py-3">
+                                        {formatDateToLocal(absence.date)}
+                                    </td>
+                                    <td className="whitespace-nowrap px-3 py-3">
+                                        <Status
+                                            status={absence.status}
+                                        />
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div> */}
+        </div>
+    );
 }

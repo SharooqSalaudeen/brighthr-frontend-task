@@ -4,13 +4,13 @@ import { InvoicesTableSkeleton } from "./components/Skeletons/skeletons";
 import Table from "./components/Table/table";
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-6">
+    return (
+        <main className="flex  flex-col justify-between items-center p-6 min-h-screen">
             <Suspense
                 fallback={<InvoicesTableSkeleton />}
             >
-                <Table query={query} />
+                <Table />
             </Suspense>
-    </main>
-  );
+        </main>
+    );
 }

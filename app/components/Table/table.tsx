@@ -15,6 +15,7 @@ export default async function Table({ employeeName, sortBy }: { employeeName?: s
             <div className="inline-block min-w-full align-middle">
                 <div className="rounded-lg p-2 md:pt-0 ">
                     <div className="md:hidden">
+                        {absences.length === 0 && <div className='flex justify-center'> No Data</div>}
                         {absences?.map((item: AbsenseTableData) => (
                             <div
                                 key={item.id}
@@ -127,6 +128,8 @@ export default async function Table({ employeeName, sortBy }: { employeeName?: s
                             ))}
                         </tbody>
                     </table>
+                    {absences.length === 0 && <div className='flex justify-center'> No Data</div>}
+
                 </div>
             </div>
         </div>

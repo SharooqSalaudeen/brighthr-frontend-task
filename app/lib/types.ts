@@ -19,6 +19,7 @@ export type AbsenceConflict = {
 
 export type AbsenseTableData = {
     id: number;
+    employeeId: string;
     employeeName: string;
     startDate: string;
     endDate: string;

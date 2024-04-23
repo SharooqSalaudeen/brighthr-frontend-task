@@ -1,22 +1,32 @@
-import Image from "next/image";
 import { Suspense } from 'react';
-import { InvoicesTableSkeleton } from "./components/Skeletons/skeletons";
-import Table from "./components/Table/table";
-import Breadcrumbs from "./components/Breadcrumbs/breadcrumbs";
+import { AbsenceTableSkeleton } from './components/Skeletons/skeletons';
+import Table from './components/Table/table';
+import Breadcrumbs from './components/Breadcrumbs/breadcrumbs';
+import { log } from 'console';
 
-export default function Home() {
+export default function Page({
+    searchParams,
+}: {
+    searchParams?: {
+        employeeName?: string;
+        sortBy?: string;
+    };
+}) {
+    const employeeName = searchParams?.employeeName || '';
+    const sortBy = searchParams?.sortBy || '';
+
+    console.log('sortby', sortBy);
+
     return (
         <main className="flex flex-col justify-between items-center p-6 min-h-screen">
-            <Breadcrumbs
-                breadcrumbs={[
-                    { label: 'Absences', href: '/' },
-                ]}
-            />
             <div className="w-full max-w-[900px]">
-                <Suspense
-                    fallback={<InvoicesTableSkeleton />}
-                >
-                    <Table />
+                <div>
+                    <Breadcrumbs
+                        breadcrumbs={[{ label: `Absences ${employeeName ? `- ${employeeName}` : ''}`, href: '/' }]}
+                    />
+                </div>
+                <Suspense fallback={<AbsenceTableSkeleton />}>
+                    <Table employeeName={employeeName} sortBy={sortBy} />
                 </Suspense>
             </div>
         </main>

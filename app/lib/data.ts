@@ -79,8 +79,8 @@ export async function fetchAbsences(employeeName?: string, sortBy?: string): Pro
         // If no filtering or sorting is required, return the filtered data directly
         return filteredData;
     } catch (error) {
-        console.error('Failed to fetch revenue data:', error);
-        throw new Error('Failed to fetch revenue data.');
+        console.error('Failed to fetch absence data:', error);
+        throw new Error('Failed to fetch absence data.');
     }
 }
 

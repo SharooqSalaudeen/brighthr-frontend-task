@@ -2,14 +2,14 @@
 
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 
-type SearchParamsType = {
+type SearchParamsHandlerType = {
     children: React.ReactNode;
     name: string;
     value: string;
     routeType: 'push' | 'replace';
 };
 
-export default function SearchParams({ children, name, value, routeType = 'replace' }: SearchParamsType) {
+export default function SearchParamsHandler({ children, name, value, routeType = 'replace' }: SearchParamsHandlerType) {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { replace, push } = useRouter();

@@ -15,8 +15,6 @@ export default function Page({
     const employeeName = searchParams?.employeeName || '';
     const sortBy = searchParams?.sortBy || '';
 
-    console.log('sortby', sortBy);
-
     return (
         <main className="flex flex-col justify-between items-center p-6 min-h-screen">
             <div className="w-full max-w-[900px]">

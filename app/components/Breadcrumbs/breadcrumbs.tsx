@@ -9,7 +9,7 @@ interface Breadcrumb {
 
 export default function Breadcrumbs({ breadcrumbs }: { breadcrumbs: Breadcrumb[] }) {
     return (
-        <nav aria-label="Breadcrumb" className="mb-6 block">
+        <nav aria-label="Breadcrumb" className="mb-6 ml-2 block md:ml-[32px]">
             <ol className="flex text-xl md:text-2xl">
                 {breadcrumbs.map((breadcrumb, index) => (
                     <li

@@ -1,4 +1,8 @@
-**The task**
+**Live link**: [https://brighthr-frontend-task-sharooqsalaudeens-projects.vercel.app](https://brighthr-frontend-task-sharooqsalaudeens-projects.vercel.app)
+
+_(Mobile repsonsive Design with Server and Client side rendering)_
+
+### The task
 
 Use the fake endpoints provided to create a list of absences.
 

@@ -2,7 +2,6 @@ import { Suspense } from 'react';
 import { AbsenceTableSkeleton } from './components/Skeletons/skeletons';
 import Table from './components/Table/table';
 import Breadcrumbs from './components/Breadcrumbs/breadcrumbs';
-import { log } from 'console';
 
 export default function Page({
     searchParams,
